@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
     <Card style={{ margin: 10 }}>
       <Card.Cover source={{ uri: product.image }} />
       <Card.Content>

@@ -28,6 +28,7 @@ export default function RootLayout() {
   const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
   const [searchQuery, setSearchQuery] = React.useState('');
 
+
   return (
     <PaperProvider theme={theme}>
 
@@ -36,7 +37,9 @@ import { Provider as PaperProvider } from 'react-native-paper';
 
 export default function RootLayout() {
   return (
+
     <PaperProvider>
+    <PaperProvider theme={theme}>
       <Stack>
         <Stack.Screen
           name="index"
@@ -65,6 +68,7 @@ export default function RootLayout() {
             headerTintColor: '#fff',
           }}
         />
+
             title: 'Home',
           }}
         />

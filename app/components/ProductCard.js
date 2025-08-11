@@ -43,15 +43,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-    <Card style={{ margin: 10 }}>
-      <Card.Cover source={{ uri: product.image }} />
-      <Card.Content>
-        <Text variant="titleMedium">{product.name}</Text>
-        <Text variant="bodyMedium">₹{product.price}</Text>
-      </Card.Content>
-      <Card.Actions>
-        <Button onPress={() => addToCart(product)}>Add to Cart</Button>
-      </Card.Actions>
-    </Card>
-  );
-}

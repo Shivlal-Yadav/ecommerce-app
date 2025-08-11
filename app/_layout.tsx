@@ -1,29 +1,64 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+import React from 'react';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { Provider as PaperProvider, DefaultTheme, Searchbar } from 'react-native-paper';
+import { useColorScheme } from 'react-native';
+import { Colors } from '../constants/Colors';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+const lightTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: Colors.light.tint,
+    background: Colors.light.background,
+  },
+};
+
+const darkTheme = {
+  ...DefaultTheme,
+  dark: true,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: Colors.dark.tint,
+    background: Colors.dark.background,
+  },
+};
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
+  const [searchQuery, setSearchQuery] = React.useState('');
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <PaperProvider theme={theme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen
+          name="index"
+          options={{
+            headerTitle: () => (
+              <Searchbar
+                placeholder="Search for products"
+                onChangeText={setSearchQuery}
+                value={searchQuery}
+                style={{ flex: 1 }}
+              />
+            ),
+            headerStyle: {
+              backgroundColor: Colors.flipkartBlue,
+            },
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="cart"
+          options={{
+            title: 'Cart',
+            headerStyle: {
+              backgroundColor: Colors.flipkartBlue,
+            },
+            headerTintColor: '#fff',
+          }}
+        />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    </PaperProvider>
   );
 }

@@ -30,6 +30,13 @@ export default function RootLayout() {
 
   return (
     <PaperProvider theme={theme}>
+
+import { Stack } from 'expo-router';
+import { Provider as PaperProvider } from 'react-native-paper';
+
+export default function RootLayout() {
+  return (
+    <PaperProvider>
       <Stack>
         <Stack.Screen
           name="index"
@@ -58,6 +65,10 @@ export default function RootLayout() {
             headerTintColor: '#fff',
           }}
         />
+            title: 'Home',
+          }}
+        />
+        <Stack.Screen name="cart" options={{ title: 'Cart' }} />
       </Stack>
     </PaperProvider>
   );
